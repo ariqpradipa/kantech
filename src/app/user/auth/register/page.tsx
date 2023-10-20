@@ -10,13 +10,13 @@ import {
 } from "@material-tailwind/react";
 
 
-export default function Login() {
+export default function Register() {
     return (
         <>
             <div className="mx-auto space-y-16 mt-10">
                 <div className="flex">
                     <div className="flex flex-col">
-                        <h1 className="text-6xl font-bold">KanTech</h1>
+                        <h1 className="text-5xl font-bold">Create Account</h1>
                         <div className="flex p-1 bg-only-purple" />
                     </div>
                 </div>
@@ -35,7 +35,7 @@ export default function Login() {
                                         className: "hidden",
                                     }}
                                 />
-                                <Typography variant="h6" className="-mb-3 text-only-white">
+                                <Typography variant="h6" className="-mb-3 text-only-white text-only-white">
                                     Password
                                 </Typography>
                                 <Input
@@ -44,21 +44,30 @@ export default function Login() {
                                     type="password"
                                     className=" text-only-white !border-t-blue-gray-200 focus:!border-only-purple"
                                     labelProps={{
-                                        className: "hidden before:content-none after:content-none",
+                                        className: "hidden",
+                                    }}
+                                />
+                                <Typography variant="h6" className="-mb-3 text-only-white">
+                                    Confirm Password
+                                </Typography>
+                                <Input
+                                    crossOrigin
+                                    label="confirmPassword"
+                                    type="password"
+                                    className=" text-only-white !border-t-blue-gray-200 focus:!border-only-purple"
+                                    labelProps={{
+                                        className: "hidden",
                                     }}
                                 />
                             </div>
                             <Button className="mt-6 bg-only-purple" fullWidth>
-                                login
-                            </Button>
-                            <Button className="mt-6 bg-only-purple" fullWidth>
-                                Login with sso
+                                register
                             </Button>
                             <Typography color="gray" className="mt-4 text-center font-normal">
-                                Don’t have account?{" "}
-                                <Link href="/user/auth/register" className="font-medium text-only-purple">
-                                    Create Account
-                                </Link>
+                                Already have account?{" "}
+                                <a href="/user/auth/login" className="font-medium text-only-purple">
+                                    Login
+                                </a>
                             </Typography>
                         </form>
                     </div>
