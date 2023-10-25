@@ -27,11 +27,11 @@ export default function AppBar({ activeButton }: any) {
                             </Button>
                         </Link>
                         <Link href="/user/orders" className="flex w-full">
-                            <Button className={`flex flex-col w-full items-center gap-2 rounded-t-lg rounded-b-none ${activeButton === "orders" ? "bg-black bg-opacity-30" : "bg-transparent"}`}>
+                            <Button className={`flex flex-col w-full justify-center items-center gap-2 rounded-t-lg rounded-b-none ${activeButton === "orders" ? "bg-black bg-opacity-30" : "bg-transparent"}`}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="white"
-                                    viewBox="0 0 512 512"
+                                    viewBox="0 0 384 512"
                                     strokeWidth={2}
                                     stroke="currentColor"
                                     className="h-8 w-8"
@@ -48,7 +48,7 @@ export default function AppBar({ activeButton }: any) {
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="white"
-                                    viewBox="0 0 512 512"
+                                    viewBox="0 0 448 512"
                                     strokeWidth={2}
                                     stroke="currentColor"
                                     className="h-8 w-8"
@@ -65,7 +65,7 @@ export default function AppBar({ activeButton }: any) {
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="white"
-                                    viewBox="0 0 512 512"
+                                    viewBox="0 0 448 512"
                                     strokeWidth={2}
                                     stroke="currentColor"
                                     className="h-8 w-8"
