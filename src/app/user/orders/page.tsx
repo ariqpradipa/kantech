@@ -1,10 +1,10 @@
 import AppBar from '../../components/menu/appbar'
 
-export default function Explore() {
+export default function Orders() {
     return (
         <>
             <div className=''>
-                <AppBar activeButton="explore" />
+                <AppBar activeButton="orders" />
             </div>
         </>
     )

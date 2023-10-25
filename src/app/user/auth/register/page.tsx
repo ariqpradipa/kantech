@@ -1,8 +1,10 @@
+"use client";
+
 import Link from 'next/link';
 import {
     Input,
     Button,
-} from "../../../components/material_tailwind/mtw";
+} from "@material-tailwind/react";
 
 
 export default function Register() {

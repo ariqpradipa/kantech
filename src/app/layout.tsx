@@ -15,8 +15,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${poppins.className} flex md:w-1/3 md:mx-auto bg-only-black text-only-white`}>{children}</body>
-    </html>
+    <>
+      <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+      </head>
+      <html lang="en">
+        <body className={`${poppins.className} md:w-1/3 mx-auto bg-only-black text-only-white`}>{children}</body>
+      </html>
+    </>
   )
 }

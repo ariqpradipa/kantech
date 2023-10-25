@@ -1,8 +1,10 @@
+"use client";
+
 import Link from 'next/link';
 import {
     Input,
     Button,
-} from "../../../components/material_tailwind/mtw";
+} from "@material-tailwind/react";
 
 
 export default function Login() {
@@ -43,7 +45,7 @@ export default function Login() {
                                     />
                                 </div>
                             </div>
-                            <Button className="mt-6 bg-only-purple" fullWidth>
+                            <Button className="mt-6 bg-only-purple" fullWidth onClick={() => { console.log("hello from login") }}>
                                 login
                             </Button>
                             <Button className="mt-6 bg-only-purple" fullWidth>
