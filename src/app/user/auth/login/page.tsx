@@ -4,6 +4,7 @@ import Link from 'next/link';
 import {
     Input,
     Button,
+    Typography,
 } from "@material-tailwind/react";
 
 
@@ -21,8 +22,10 @@ export default function Login() {
                     <div className="flex justify-center items-center">
                         <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                             <div className="mb-1 flex flex-col gap-6">
-                                <div>
-                                    <text className="text-lg text-only-white">Email</text>
+                                <div className='flex flex-col space-y-4'>
+                                    <Typography variant="h6" className="-mb-3 text-only-white">
+                                        Email
+                                    </Typography>
                                     <Input
                                         crossOrigin
                                         label="username"
@@ -32,8 +35,10 @@ export default function Login() {
                                         }}
                                     />
                                 </div>
-                                <div>
-                                    <text className="text-lg text-only-white">Password</text>
+                                <div className='flex flex-col space-y-4'>
+                                    <Typography variant="h6" className="-mb-3 text-only-white">
+                                        Password
+                                    </Typography>
                                     <Input
                                         crossOrigin
                                         label="password"
@@ -52,12 +57,12 @@ export default function Login() {
                                 Login with sso
                             </Button>
                             <div className='flex justify-center mt-5'>
-                                <text className='only-white'>
+                                <Typography className="mt-4 text-center font-normal text-only-white">
                                     Don’t have account?{" "}
-                                    <Link href="/user/auth/register" className="font-bold text-only-purple">
+                                    <Link href="/user/auth/register" className="font-medium text-only-purple">
                                         Create Account
                                     </Link>
-                                </text>
+                                </Typography>
                             </div>
                         </form>
                     </div>

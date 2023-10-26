@@ -13,6 +13,8 @@ const config: Config = withMT({
         'only-white': '#FFFFFE',
         'only-black': '#16161A',
         'only-purple': '#7F5AF0',
+        'only-dark-gray': '#242629',
+        'only-gray' : "#94A1B2",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

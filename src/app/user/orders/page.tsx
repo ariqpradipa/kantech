@@ -1,4 +1,4 @@
-import AppBar from '../../components/menu/appbar'
+import AppBar from '@/components/menu/appbar'
 
 export default function Orders() {
     return (

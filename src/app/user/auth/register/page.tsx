@@ -4,6 +4,7 @@ import Link from 'next/link';
 import {
     Input,
     Button,
+    Typography,
 } from "@material-tailwind/react";
 
 
@@ -21,8 +22,10 @@ export default function Register() {
                     <div className="flex justify-center items-center">
                         <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
                             <div className="mb-1 flex flex-col gap-6">
-                                <div>
-                                    <text className="text-lg text-only-white">Email</text>
+                                <div className='flex flex-col space-y-4'>
+                                    <Typography variant="h6" className="-mb-3 text-only-white">
+                                        Email
+                                    </Typography>
                                     <Input
                                         crossOrigin
                                         label="username"
@@ -32,8 +35,10 @@ export default function Register() {
                                         }}
                                     />
                                 </div>
-                                <div>
-                                    <text className="text-lg text-only-white">Password</text>
+                                <div className='flex flex-col space-y-4'>
+                                    <Typography variant="h6" className="-mb-3 text-only-white">
+                                        Password
+                                    </Typography>
                                     <Input
                                         crossOrigin
                                         label="password"
@@ -44,8 +49,10 @@ export default function Register() {
                                         }}
                                     />
                                 </div>
-                                <div>
-                                    <text className="text-lg text-only-white">Confirm Password</text>
+                                <div className='flex flex-col space-y-4'>
+                                    <Typography variant="h6" className="-mb-3 text-only-white">
+                                        Confirm Password
+                                    </Typography>
                                     <Input
                                         crossOrigin
                                         label="confirmPassword"
@@ -61,12 +68,12 @@ export default function Register() {
                                 register
                             </Button>
                             <div className='flex justify-center mt-5'>
-                                <text className='only-white'>
+                                <Typography className="mt-4 text-center font-normal text-only-white">
                                     Already have account?{" "}
-                                    <Link href="/user/auth/login" className="font-bold text-only-purple">
+                                    <Link href="/user/auth/login" className="font-medium text-only-purple">
                                         Login
                                     </Link>
-                                </text>
+                                </Typography>
                             </div>
                         </form>
                     </div>
