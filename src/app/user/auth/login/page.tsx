@@ -14,7 +14,7 @@ export default function Login() {
             <div className="mx-auto space-y-16 mt-10">
                 <div className="flex">
                     <div className="flex flex-col">
-                        <h1 className="text-6xl font-bold">KanTech</h1>
+                        <h1 className="text-6xl font-bold">Login</h1>
                         <div className="flex p-1 bg-only-purple" />
                     </div>
                 </div>
