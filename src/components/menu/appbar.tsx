@@ -6,11 +6,11 @@ import { Button, IconButton } from "@material-tailwind/react";
 export default function AppBar({ activeButton }: any) {
     return (
         <>
-            <div className="fixed inset-0 bottom-0 flex justify-center items-end">
-                <div className="flex bg-only-purple rounded-t-lg w-full lg:w-1/3">
+            <div className="fixed bottom-0 w-full lg:w-1/3 bg-only-purple rounded-t-lg">
+                <div className="flex w-full">
                     <div className="flex mx-auto justify-between w-full">
                         <Link href="/user/explore" className="flex w-full">
-                            <Button className={`flex flex-col w-full items-center gap-2 rounded-t-lg rounded-b-none ${activeButton === "explore" ? "bg-black bg-opacity-30" : "bg-transparent"}`}>
+                            <Button className={`flex flex-col w-full items-center gap-2 rounded-t-lg rounded-b-none ${activeButton === "explore" ? "bg-black bg-opacity-30" : "bg-only-purple"}`}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="white"
@@ -27,7 +27,7 @@ export default function AppBar({ activeButton }: any) {
                             </Button>
                         </Link>
                         <Link href="/user/orders" className="flex w-full">
-                            <Button className={`flex flex-col w-full justify-center items-center gap-2 rounded-t-lg rounded-b-none ${activeButton === "orders" ? "bg-black bg-opacity-30" : "bg-transparent"}`}>
+                            <Button className={`flex flex-col w-full justify-center items-center gap-2 rounded-t-lg rounded-b-none ${activeButton === "orders" ? "bg-black bg-opacity-30" : "bg-only-purple"}`}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="white"
@@ -44,7 +44,7 @@ export default function AppBar({ activeButton }: any) {
                             </Button>
                         </Link>
                         <Link href="/user/history" className="flex w-full">
-                            <Button className={`flex flex-col w-full items-center gap-2 rounded-t-lg rounded-b-none ${activeButton === "history" ? "bg-black bg-opacity-30" : "bg-transparent"}`}>
+                            <Button className={`flex flex-col w-full items-center gap-2 rounded-t-lg rounded-b-none ${activeButton === "history" ? "bg-black bg-opacity-30" : "bg-only-purple"}`}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="white"
@@ -61,7 +61,7 @@ export default function AppBar({ activeButton }: any) {
                             </Button>
                         </Link>
                         <Link href="/user/account" className="flex w-full">
-                            <Button className={`flex flex-col w-full items-center gap-2 rounded-t-lg rounded-b-none ${activeButton === "account" ? "bg-black bg-opacity-30" : "bg-transparent"}`}>
+                            <Button className={`flex flex-col w-full items-center gap-2 rounded-t-lg rounded-b-none ${activeButton === "account" ? "bg-black bg-opacity-30" : "bg-only-purple"}`}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="white"
@@ -79,7 +79,7 @@ export default function AppBar({ activeButton }: any) {
                         </Link>
                     </div>
                 </div>
-            </div >
+            </div>
         </>
     )
 }
