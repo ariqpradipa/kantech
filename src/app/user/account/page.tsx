@@ -7,7 +7,7 @@ export default function Account() {
     return (
         <>
             <div className="flex flex-col h-full  max-h-screen">
-                <div className="flex flex-col m-4 mt-12 overflow-hidden">
+                <div className="flex flex-col m-4 overflow-hidden">
                     <div className="flex mb-10">
                         <div className="flex flex-col">
                             <h1 className="text-5xl lg:text-6xl font-bold">Your Account</h1>
