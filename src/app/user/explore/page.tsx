@@ -4,8 +4,6 @@ import Link from "next/link";
 import AppBar from '@/components/menu/appbar'
 import VendorList from '@/components/cards/vendorlist'
 
-import { Typography } from "@material-tailwind/react";
-
 export default function Explore() {
     return (
         <>

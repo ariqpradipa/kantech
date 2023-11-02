@@ -1,4 +1,3 @@
-"use client";
 export default function OrderList({ menuName, vendorName, note, status, menuImage }: any) {
     return (
         <>

@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { Avatar } from "@material-tailwind/react";
 import AppBar from '@/components/menu/appbar'
 
@@ -23,25 +24,34 @@ export default function Account() {
                         <div className="flex flex-col ml-2 justify-center">
                             <text className="text-3xl font-bold text-only-white">Username</text>
                             <text className="text-base text-only-white">username@email.com</text>
-
-
                         </div>
                     </div>
 
                     <div className="flex flex-col h-screen justify-between">
                         <div className="flex flex-col mt-10 gap-3">
-                            <text className="text-only-white text-xl font-bold">Update Profile</text>
-                            <text className="text-only-white text-xl font-bold">Change Password</text>
-                            <text className="text-only-white text-xl font-bold">Favorites</text>
+                            <Link href="#">
+                                <text className="text-only-white text-xl font-bold">Update Profile</text>
+                            </Link>
+                            <Link href="#">
+                                <text className="text-only-white text-xl font-bold">Change Password</text>
+                            </Link>
+                            <Link href="#">
+                                <text className="text-only-white text-xl font-bold">Favorites</text>
+                            </Link>
                         </div>
+
                         <div className="flex flex-col mb-24 gap-3">
-                            <text className="text-only-white text-xl font-bold">Terms & Privacy</text>
-                            <text className="text-only-white text-xl font-bold">Logout</text>
+                            <Link href="#">
+                                <text className="text-only-white text-xl font-bold">Terms & Privacy</text>
+                            </Link>
+                            <Link href="#">
+                                <text className="text-only-white text-xl font-bold">Logout</text>
+                            </Link>
                         </div>
                     </div>
                 </div>
                 <AppBar activeButton="account" />
-            </div>
+            </div >
         </>
     )
 }
