@@ -1,6 +1,4 @@
 "use client";
-import Link from "next/link";
-
 import AppBar from '@/components/menu/appbar'
 import HistoryList from '@/components/cards/historylist'
 
@@ -17,23 +15,21 @@ export default function History() {
                         </div>
                     </div>
                     <div className='flex flex-col justify-center mx-auto space-y-6 mb-20'>
-                        <Link href="/user/auth/login">
-                            <HistoryList
-                                orderDate="1698937067"
-                                menuName="Bubur Ayam"
-                                vendorName="Rumah Bu Jepe"
-                                menuImage="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                                note="tidak pakai sambel sama sekali"
-                                status="Process"
-                                rating=""
-                                review=""
-                            />
-                        </Link>
+                        <HistoryList
+                            orderDate="1698937067"
+                            menuName="Bubur Ayam"
+                            vendorName="Rumah Bu Jepe"
+                            image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
+                            note="tidak pakai sambel sama sekali"
+                            status="Process"
+                            rating=""
+                            review=""
+                        />
                         <HistoryList
                             orderDate="1698937067"
                             menuName="Bubur Ayam madura"
                             vendorName="Rumah Bu Jepe 2"
-                            menuImage="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
+                            image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
                             note="tidak pakai sambel sama sekali"
                             status="Process"
                             rating="2"
@@ -43,7 +39,7 @@ export default function History() {
                             orderDate="1698937067"
                             menuName="Bubur Ayam pedas"
                             vendorName="Rumah Bu Jepe 3"
-                            menuImage="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
+                            image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
                             note="tidak pakai sambel sama sekali"
                             status="Process"
                             rating="3"

@@ -21,7 +21,7 @@ export default function Orders() {
                             <OrderList
                                 menuName="Bubur Ayam"
                                 vendorName="Rumah Bu Jepe"
-                                menuImage="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
+                                image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
                                 note="tidak pakai sambel sama sekali"
                                 status="Process"
                             />

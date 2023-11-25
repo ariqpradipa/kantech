@@ -18,15 +18,15 @@ export default function Explore() {
                         </div>
                     </div>
                     <div className='flex flex-col justify-center mx-auto space-y-6 mb-20'>
-                        <Link href="/user/auth/login">
+                        <Link href={"/user/vendor/" + "vendorid"}>
                             <VendorList
-                                vendorName="Rumah Bu Jepe"
-                                vendorDescription="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque"
-                                vendorImage="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                                vendorRating="4.7"
+                                name="Rumah Bu Jepe"
+                                description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque"
+                                image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
+                                rating="4.7"
                             />
                         </Link>
-                        <VendorList
+                        {/* <VendorList
                             vendorName="Rumah Bu Jepe 2"
                             vendorDescription="Lorem ipsum dolor sit amehil."
                             vendorImage="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
@@ -49,7 +49,7 @@ export default function Explore() {
                             vendorDescription="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
                             vendorImage="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
                             vendorRating="2.6"
-                        />
+                        /> */}
                     </div>
                 </div>
                 <AppBar activeButton="explore" />

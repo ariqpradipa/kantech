@@ -14,12 +14,15 @@ const config: Config = withMT({
         'only-black': '#16161A',
         'only-purple': '#7F5AF0',
         'only-dark-gray': '#242629',
-        'only-gray' : "#94A1B2",
+        'only-gray': "#94A1B2",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif']
       },
     },
   },
