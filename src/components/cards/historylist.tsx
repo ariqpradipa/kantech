@@ -74,15 +74,12 @@ export default function History({ orderDate, menuName, vendorName, note, image, 
                                             </a>
                                             :
                                             <a className="cursor-pointer" onClick={handleOpenDialog}>
-                                                <div className="flex flex-col">
+                                                <div className="flex flex-col min-w-min">
                                                     <p className="text-only-white text-sm">Your review:</p>
                                                     <Textarea
                                                         rows={2}
-                                                        className="text-only-white text-xs !border-0 p-0 m-0 min-h-full focus:border-transparent font-poppins"
+                                                        className="text-only-white text-xs !border-0 !p-0 !m-0 min-h-min focus:border-transparent font-poppins"
                                                         value={reviewValue}
-                                                        containerProps={{
-                                                            className: "grid h-full",
-                                                        }}
                                                         labelProps={{
                                                             className: "before:content-none after:content-none",
                                                         }}

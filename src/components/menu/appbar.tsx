@@ -6,7 +6,7 @@ import { Button, IconButton } from "@material-tailwind/react";
 export default function AppBar({ activeButton }: any) {
     return (
         <>
-            <div className="fixed bottom-0 w-full overflow-auto lg:w-1/3 bg-only-purple rounded-t-lg">
+            <div className="fixed bottom-0 w-full overflow-auto lg:w-1/3 bg-only-purple rounded-t-lg z-[1000]">
                 <div className="flex w-full">
                     <div className="flex mx-auto justify-between w-full">
                         <Link href="/user/explore" className="flex w-full">
