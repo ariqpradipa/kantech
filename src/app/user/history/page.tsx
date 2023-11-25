@@ -19,7 +19,7 @@ export default function History() {
                             orderDate="1698937067"
                             menuName="Bubur Ayam"
                             vendorName="Rumah Bu Jepe"
-                            image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
+                            image="https://asset.kompas.com/crops/Kyp-MBp3Kf0PLGveth_zzhU2gfI=/0x0:1000x667/750x500/data/photo/2020/07/11/5f09e008e7fee.jpg"
                             note="tidak pakai sambel sama sekali"
                             status="Process"
                             rating=""

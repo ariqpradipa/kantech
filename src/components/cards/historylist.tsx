@@ -46,8 +46,7 @@ export default function History({ orderDate, menuName, vendorName, note, image, 
     return (
         <>
             <div className="flex">
-                <div className="flex-none w-28 lg:w-32 bg-cover bg-center text-center rounded-l-xl" style={{ backgroundImage: `url(${image})` }}>
-                </div>
+                <div className="flex-none w-28 lg:w-32 bg-cover bg-center text-center rounded-l-xl" style={{ backgroundImage: `url(${image})` }} />
                 <div className="flex flex-col w-full justify-between leading-normal bg-only-dark-gray px-4 py-3 rounded-r-xl">
                     <div className="flex flex-col">
                         <p className="text-only-white text-xs">{formatOrderDate}</p>

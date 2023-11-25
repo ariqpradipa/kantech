@@ -33,11 +33,11 @@ export default function Explore({ params }: pageProps) {
                     </div>
                     <div className='flex flex-col justify-center mx-auto space-y-6 mb-20'>
                         <MenuList
-                        // name="menuName"
-                        // description="description file mfklwem fwefm kklrm fkl mklf merkm fklm fklrm klf mlf"
-                        // price="15000"
-                        // rating="4.2"
-                        // image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
+                        name="menuName"
+                        description="the food is so good"
+                        price="15000"
+                        rating="4.2"
+                        image="https://asset.kompas.com/crops/Kyp-MBp3Kf0PLGveth_zzhU2gfI=/0x0:1000x667/750x500/data/photo/2020/07/11/5f09e008e7fee.jpg"
 
                         />
                     </div>
