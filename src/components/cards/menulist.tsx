@@ -82,7 +82,7 @@ export default function MenuList({ name, description, price, rating, image }: an
 
                         <p className="text-only-white font-bold text-lg lg:text-xl mb-2">{name}</p>
                         <p className="text-only-gray text-xs lg:text-sm mb-4">{description}</p>
-                        <p className="text-only-white font-bold text-xs lg:text-xl">{formatCurrency(price)}</p>
+                        <p className="text-only-white font-bold text-lg lg:text-xl">{formatCurrency(price)}</p>
 
                     </div>
                 </DialogBody>
