@@ -14,7 +14,7 @@ export default function History() {
                             <div className="flex p-1 bg-only-purple" />
                         </div>
                     </div>
-                    <div className='flex flex-col justify-center mx-auto space-y-6 mb-20'>
+                    <div className='flex flex-col justify-center mx-auto space-y-6 mb-20 w-full'>
                         <HistoryList
                             orderDate="1698937067"
                             menuName="Bubur Ayam"

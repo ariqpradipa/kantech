@@ -64,7 +64,7 @@ export default function History({ orderDate, menuName, vendorName, note, image, 
                                 :
 
                                 <div className="flex flex-row">
-                                    <div className=" flex items-center justify-center bg-only-purple rounded-l-md p-1 px-4  border-2 border-r-none border-only-white">
+                                    <div className=" flex items-center justify-center bg-only-purple rounded-l-md p-1 px-2 border-2 border-r-none border-only-white">
                                         <p className="text-only-white text-lg font-bold">{ratingValue}</p>
                                     </div>
                                     <div className="p-1 border-2 border-l-0 border-only-white rounded-r-md">
@@ -119,11 +119,10 @@ export default function History({ orderDate, menuName, vendorName, note, image, 
                 <DialogFooter>
                     <Button
                         variant="text"
-                        color="red"
                         onClick={() => handleOpenDialog(null)}
                         className="mr-1"
                     >
-                        <span>Cancel</span>
+                        <span className="text-only-white">Cancel</span>
                     </Button>
                     <Button
                         variant="gradient"

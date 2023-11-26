@@ -26,30 +26,31 @@ export default function Explore() {
                                 rating="4.7"
                             />
                         </Link>
-                        {/* <VendorList
-                            vendorName="Rumah Bu Jepe 2"
-                            vendorDescription="Lorem ipsum dolor sit amehil."
-                            vendorImage="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                            vendorRating="3.1"
-                        />
-                        <VendorList
-                            vendorName="Rumah Bu Jepe 3"
-                            vendorDescription="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
-                            vendorImage="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                            vendorRating="1.2"
-                        />
-                        <VendorList
-                            vendorName="Rumah Bu Jepe 4"
-                            vendorDescription="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
-                            vendorImage="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                            vendorRating="5.0"
-                        />
-                        <VendorList
-                            vendorName="Rumah Bu Jepe 5"
-                            vendorDescription="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil."
-                            vendorImage="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                            vendorRating="2.6"
-                        /> */}
+                        <Link href={"/user/vendor/" + "vendorid"}>
+                            <VendorList
+                                name="Rumah Bu Jepe 2"
+                                description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque"
+                                image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
+                                rating="4.7"
+                            />
+                        </Link>
+                        <Link href={"/user/vendor/" + "vendorid"}>
+                            <VendorList
+                                name="Rumah Bu Jepe 3"
+                                description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque"
+                                image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
+                                rating="4.7"
+                            />
+                        </Link>
+                        <Link href={"/user/vendor/" + "vendorid"}>
+                            <VendorList
+                                name="Rumah Bu Jepe 4"
+                                description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque asnd aslk d aklsdl asdl lkl asdlaslk dlklsa sdkl ls ka lmkls as"
+                                image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
+                                rating="4.7"
+                            />
+                        </Link>
+                        
                     </div>
                 </div>
                 <AppBar activeButton="explore" />
