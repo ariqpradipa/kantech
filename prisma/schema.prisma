@@ -1,6 +1,8 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// schema.prisma
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,22 +13,80 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model Post {
-  id        String  @id @default(cuid())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
+// Define enums
+enum Role {
+  customer
+  admin
 }
 
+enum Status {
+  confirmation
+  process
+  complete
+}
+
+// Define User model
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid()) @map("_id") // Assuming auto-generated IDs
+  email     String?
+  password  String?
   name      String?
-  email     String?  @unique
+  photo_url String?
+  role      Role
+  provider  String
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
-  posts     Post[]
 
-  @@map(name: "users")
+  Order Order[]
+}
+
+// Define Vendor model
+model Vendor {
+  id          String   @id @default(uuid()) @map("_id") // Assuming auto-generated IDs
+  email       String?
+  password    String?
+  name        String?
+  description String?
+  rating      String?
+  photo_url   String?
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  Menu  Menu[]
+  Order Order[]
+}
+
+// Define Menu model
+model Menu {
+  id          String   @id @default(uuid()) @map("_id") // Assuming auto-generated IDs
+  vendor_id   String
+  name        String?
+  description String?
+  price       String?
+  rating      String?
+  photo_url   String?
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  vendor Vendor  @relation(fields: [vendor_id], references: [id])
+  Order  Order[]
+}
+
+// Define Order model
+model Order {
+  id          String   @id @default(uuid()) @map("_id") // Assuming auto-generated IDs
+  customer_id String
+  vendor_id   String
+  menu_id     String
+  note        String?
+  status      Status
+  rating      String?
+  review      String?
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  // Define foreign key relationships
+  customer User   @relation(fields: [customer_id], references: [id])
+  vendor   Vendor @relation(fields: [vendor_id], references: [id])
+  menu     Menu   @relation(fields: [menu_id], references: [id])
 }

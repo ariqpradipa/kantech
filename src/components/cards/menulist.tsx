@@ -88,8 +88,8 @@ export default function MenuList({ name, description, price, rating, image }: an
                 </DialogBody>
                 <DialogFooter>
                     <div className="flex flex-row mx-auto gap-5 w-full px-2">
-                        <Button className="bg-only-black" onClick={() => setOpenDialog(false)} fullWidth>
-                            <span className="text-red-400">batal</span>
+                        <Button className="bg-transparent" onClick={() => setOpenDialog(false)} fullWidth>
+                            <span className="text-only-white">batal</span>
                         </Button>
                         <Button className="bg-only-purple" fullWidth>pesan</Button>
                     </div>
