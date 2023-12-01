@@ -1,32 +1,74 @@
-import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+import { NextRequest, NextResponse } from 'next/server';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import prisma from '@/lib/prisma';
 
-async function authenticateUser(username: string, password: string) {
-    // let db = null;
+export async function POST(req: NextRequest) {
+    try {
 
-    // // Check if the database instance has been initialized
-    // if (!db) {
-    //     // If the database instance is not initialized, open the database connection
-    //     db = await open({
-    //         filename: "userdatabase.db", // Specify the database file path
-    //         driver: sqlite3.Database, // Specify the database driver (sqlite3 in this case)
-    //     });
-    // }
+        const { email, password }: any = await req.json();
 
-    // const sql = `SELECT * FROM users WHERE username = ? AND password = ?`;
-    // const user = await db.get(sql, username, password);
+        if (!email || !password) {
 
-    return { id: 20 };
-}
+            return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
 
-export async function POST(req: any) {
-    const body = await req.json();
-    const { username, password } = body;
+        }
 
-    // Perform user authentication here against your database or authentication service
-    const user = await authenticateUser(username, password);
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-        expiresIn: "1m",
-    });
-    return NextResponse.json({ token });
+        // Check if the user with the provided email exists
+        const user: any = await prisma.user.findUnique({
+
+            where: { email },
+
+        });
+
+        if (!user) {
+
+            return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+
+        }
+
+        // Compare the provided password with the hashed password stored in the database
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        if (!passwordMatch) {
+
+            return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+
+        }
+
+        // Generate a JWT token
+        const token = jwt.sign({
+            userId: user.id,
+            email: user.email,
+            role: user.role,
+            provider: user.provider,
+            name: user?.name,
+            photo_url: user?.photo_url
+        }, process.env.JWT_SECRET, {
+
+            expiresIn: '30d', // Token expiration time
+
+        });
+
+        // Return the token in the response
+        // return NextResponse.json({ token }, { status: 200 });
+
+        // Set the token as a cookie
+        const cookieOptions: any = [
+            `jwt=Bearer ${token}; Path=/; HttpOnly; Max-Age=${30 * 24 * 60 * 60}; SameSite=Strict`,
+            process.env.NODE_ENV === 'production' ? 'Secure' : '', // Set to 'Secure' in production for HTTPS
+        ];
+
+        return NextResponse.json({ token }, { headers: { 'Set-Cookie': cookieOptions } });
+
+    } catch (error) {
+
+        console.error('Error handling login:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+
+    } finally {
+
+        await prisma.$disconnect();
+
+    }
 }

@@ -11,17 +11,17 @@ import {
 
 export default function Login() {
 
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleLogin = async (e: any) => {
         e.preventDefault(); // Prevent default form submission
 
-        if (!username || !password) {
+        if (!email || !password) {
             alert("Please fill in all fields");
             return;
         }
-        console.log(username, password)
+
         try {
             const response = await fetch("/api/auth/login", {
                 method: "POST",
@@ -29,17 +29,26 @@ export default function Login() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    username,
+                    email,
                     password,
                 }),
             });
 
-            if (!response.ok) throw new Error("Login failed");
+            if (response.ok) {
 
-            const { token } = await response.json();
-            document.cookie = `token=${token}; path=/`;
+                window.location.href = "/user/explore";
+
+            } else {
+
+                const data = await response.json();
+                alert(data.error || "Failed to login");
+
+            }
+
         } catch (error) {
+
             console.error(error);
+
         }
     };
 
@@ -64,12 +73,12 @@ export default function Login() {
                                         </Typography>
                                         <Input
                                             crossOrigin
-                                            label="username"
+                                            label="email"
                                             className=" text-only-white !border-t-blue-gray-200 focus:!border-only-purple"
                                             labelProps={{
                                                 className: "hidden",
                                             }}
-                                            onChange={(e) => setUsername(e.target.value)}
+                                            onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </div>
                                     <div className='flex flex-col space-y-4'>

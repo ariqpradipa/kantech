@@ -23,6 +23,7 @@ export default function Register() {
         }
 
         try {
+
             const response = await fetch("/api/auth/register", {
                 method: "POST",
                 headers: {
@@ -35,11 +36,16 @@ export default function Register() {
             });
             
             if (response.ok) {
-                window.location.href = "/user/explore";
+
+                window.location.href = "/user/auth/login";
+
             } else {
+
                 const data = await response.json();
                 alert(data.error || "Failed to register user");
+
             }
+
         } catch (error) {
             console.error("Error creating user:", error);
             alert("An unexpected error occurred");
