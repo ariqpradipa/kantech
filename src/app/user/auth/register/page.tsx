@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from 'react';
 import Link from 'next/link';
 import {
     Input,
@@ -9,6 +10,42 @@ import {
 
 
 export default function Register() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    const handleCreateUser = async (e: any) => {
+        e.preventDefault();
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+
+        try {
+            const response = await fetch("/api/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                }),
+            });
+            
+            if (response.ok) {
+                window.location.href = "/user/explore";
+            } else {
+                const data = await response.json();
+                alert(data.error || "Failed to register user");
+            }
+        } catch (error) {
+            console.error("Error creating user:", error);
+            alert("An unexpected error occurred");
+        }
+    };
+
     return (
         <>
             <div className="mx-auto space-y-16 mt-10">
@@ -22,7 +59,7 @@ export default function Register() {
                     <div className="flex justify-center items-center">
                         <div className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
 
-                            <form>
+                            <form onSubmit={handleCreateUser}>
                                 <div className="mb-1 flex flex-col gap-6">
                                     <div className='flex flex-col space-y-4'>
                                         <Typography variant="h6" className="-mb-3 text-only-white">
@@ -35,6 +72,7 @@ export default function Register() {
                                             labelProps={{
                                                 className: "hidden",
                                             }}
+                                            onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </div>
                                     <div className='flex flex-col space-y-4'>
@@ -49,6 +87,7 @@ export default function Register() {
                                             labelProps={{
                                                 className: "hidden",
                                             }}
+                                            onChange={(e) => setPassword(e.target.value)}
                                         />
                                     </div>
                                     <div className='flex flex-col space-y-4'>
@@ -63,10 +102,11 @@ export default function Register() {
                                             labelProps={{
                                                 className: "hidden",
                                             }}
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
                                         />
                                     </div>
                                 </div>
-                                <Button className="mt-6 bg-only-purple" fullWidth>
+                                <Button type="submit" className="mt-6 bg-only-purple" fullWidth>
                                     register
                                 </Button>
                             </form>

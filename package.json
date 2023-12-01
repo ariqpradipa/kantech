@@ -11,8 +11,10 @@
   "dependencies": {
     "@material-tailwind/react": "^2.1.4",
     "@prisma/client": "^5.6.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/jsonwebtoken": "^9.0.5",
     "@vercel/postgres": "^0.5.1",
+    "bcrypt": "^5.1.1",
     "jsonwebtoken": "^9.0.2",
     "next": "13.5.3",
     "prisma": "^5.4.2",

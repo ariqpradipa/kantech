@@ -1,32 +1,40 @@
-import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+import { NextApiRequest, NextApiResponse } from 'next';
+import bcrypt from 'bcrypt';
+import prisma from "@/lib/prisma";
 
-async function authenticateUser(username: string, password: string) {
-    // let db = null;
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
+    try {
+        console.log(req.body);
+        const body = await req.body.json(); // Use req.body.json() to parse the JSON body
+        const { email, password } = body;
 
-    // // Check if the database instance has been initialized
-    // if (!db) {
-    //     // If the database instance is not initialized, open the database connection
-    //     db = await open({
-    //         filename: "userdatabase.db", // Specify the database file path
-    //         driver: sqlite3.Database, // Specify the database driver (sqlite3 in this case)
-    //     });
-    // }
+        if (!email || !password) {
+            return res.status(400).json({ error: "Missing email or password" });
+        }
 
-    // const sql = `SELECT * FROM users WHERE username = ? AND password = ?`;
-    // const user = await db.get(sql, username, password);
+        // convert password to hash
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-    return { id: 20 };
-}
+        const result = await prisma.user.create({
+            data: {
+                email,
+                password: hashedPassword,
+                role: 'customer',
+                provider: 'kantech.vercel.app'
+            }
+        });
 
-export async function POST(req: any) {
-    const body = await req.json();
-    const { username, password } = body;
+        res.json(result);
 
-    // Perform user authentication here against your database or authentication service
-    const user = await authenticateUser(username, password);
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-        expiresIn: "1m",
-    });
-    return NextResponse.json({ token });
+    } catch (error) {
+
+        console.error('Error handling create user:', error);
+
+        return res.status(500).json({ error: 'Internal Server Error' });
+
+    } finally {
+
+        await prisma.$disconnect();
+
+    }
 }
