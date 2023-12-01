@@ -1,15 +1,14 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import prisma from "@/lib/prisma";
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: NextRequest) {
     try {
-        console.log(req.body);
-        const body = await req.body.json(); // Use req.body.json() to parse the JSON body
-        const { email, password } = body;
+
+        const { email, password }: any = await req.json();
 
         if (!email || !password) {
-            return res.status(400).json({ error: "Missing email or password" });
+            return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
         }
 
         // convert password to hash
@@ -24,13 +23,18 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
             }
         });
 
-        res.json(result);
+        return NextResponse.json({ result: result }, { status: 200 });
 
-    } catch (error) {
+    } catch (error: any) {
+
+        if (error.code === 'P2002' && error.meta?.target?.includes('email')) {
+
+            return NextResponse.json({ error: 'Email already exists' }, { status: 400 });
+
+        }
 
         console.error('Error handling create user:', error);
-
-        return res.status(500).json({ error: 'Internal Server Error' });
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
 
     } finally {
 

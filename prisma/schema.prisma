@@ -28,12 +28,12 @@ enum Status {
 // Define User model
 model User {
   id        String   @id @default(uuid()) @map("_id") // Assuming auto-generated IDs
-  email     String?
+  email     String?  @unique
   password  String?
   name      String?
   photo_url String?
-  role      Role
-  provider  String
+  role      Role     @default(customer)
+  provider  String   @default("kantech.vercel.app")
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
@@ -43,7 +43,7 @@ model User {
 // Define Vendor model
 model Vendor {
   id          String   @id @default(uuid()) @map("_id") // Assuming auto-generated IDs
-  email       String?
+  email       String?  @unique
   password    String?
   name        String?
   description String?
