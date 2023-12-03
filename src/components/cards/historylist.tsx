@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import {
     Rating,
     Button,
@@ -54,9 +55,11 @@ export default function History({ orderDate, menuName, vendorName, note, image, 
                     floated={false}
                     className="m-0 w-2/5 rounded-r-none"
                 >
-                    <img
+                    <Image
                         src={image}
                         alt="card-image"
+                        width={1024}
+                        height={768}
                         className="h-full w-full object-cover"
                     />
                 </CardHeader>

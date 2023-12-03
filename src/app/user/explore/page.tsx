@@ -41,50 +41,16 @@ export default function Explore() {
                                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                     <Spinner className="text-only-white h-10 w-10" />
                                 </div> :
-                                vendorList.map((vendor: any, index) => {
+                                vendorList.map((vendor: any) => {
                                     return (
-                                        <Link href={"/user/explore/vendor/" + vendor.id}>
+                                        <Link href={"/user/explore/vendor/" + vendor.id} key={vendor.id}>
                                             <VendorList
-                                                key={index}
                                                 props={vendor}
                                             />
                                         </Link>
                                     )
                                 })
                         }
-                        {/* <Link href={"/user/vendor/" + "vendorid"}>
-                            <VendorList
-                                name="Rumah Bu Jepe"
-                                description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque"
-                                image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                                rating="4.7"
-                            />
-                        </Link>
-                        <Link href={"/user/vendor/" + "vendorid"}>
-                            <VendorList
-                                name="Rumah Bu Jepe 2"
-                                description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque"
-                                image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                                rating="4.7"
-                            />
-                        </Link>
-                        <Link href={"/user/vendor/" + "vendorid"}>
-                            <VendorList
-                                name="Rumah Bu Jepe 3"
-                                description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque"
-                                image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                                rating="4.7"
-                            />
-                        </Link>
-                        <Link href={"/user/vendor/" + "vendorid"}>
-                            <VendorList
-                                name="Rumah Bu Jepe 4"
-                                description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque asnd aslk d aklsdl asdl lkl asdlaslk dlklsa sdkl ls ka lmkls as"
-                                image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                                rating="4.7"
-                            />
-                        </Link> */}
-
                     </div>
                 </div>
                 <AppBar activeButton="explore" />

@@ -1,10 +1,7 @@
 "use client";
-import Link from "next/link";
 import { useEffect, useState } from "react"
 
 import { Spinner } from "@material-tailwind/react";
-
-import prisma from "@/lib/prisma";
 
 import AppBar from '@/components/menu/appbar'
 import VendorList from '@/components/cards/vendorlist'
@@ -86,7 +83,7 @@ export default function VendorUser({ params }: pageProps) {
                                 menuList.map((menu: any, index) => {
                                     return (
                                         <MenuList
-                                            key={index}
+                                            key={menu.id}
                                             props={menu}
                                         />
                                     )

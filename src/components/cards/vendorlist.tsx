@@ -1,3 +1,4 @@
+import Image from "next/image"
 import {
     Card,
     CardHeader,
@@ -18,9 +19,11 @@ export default function VendorList({ props }: any) {
                     floated={false}
                     className="m-0 w-2/5 rounded-r-none"
                 >
-                    <img
+                    <Image
                         src={image}
                         alt="card-image"
+                        width={1024}
+                        height={768}
                         className="h-full w-full object-cover"
                     />
                 </CardHeader>

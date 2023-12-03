@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import {
     Dialog,
     DialogBody,
@@ -9,7 +10,6 @@ import {
     Button,
     Spinner,
 } from "@material-tailwind/react";
-import jwt from "jsonwebtoken";
 
 export default function MenuList({ props }: any) {
 
@@ -96,9 +96,11 @@ export default function MenuList({ props }: any) {
                         floated={false}
                         className="m-0 w-2/5 rounded-l-none"
                     >
-                        <img
+                        <Image
                             src={image}
                             alt="card-image"
+                            width={1024}
+                            height={768}
                             className="h-full w-full object-cover"
                         />
                     </CardHeader>
@@ -114,10 +116,12 @@ export default function MenuList({ props }: any) {
                 <DialogBody>
                     <div className="p-2 lg:p-5">
                         <div className="pb-5">
-                            <img
+                            <Image
                                 className="w-full object-cover object-center rounded-xl"
                                 src={image}
-                                alt="nature image"
+                                width={1024}
+                                height={768}
+                                alt="food image"
                             />
                         </div>
 
