@@ -34,8 +34,8 @@ model User {
   photo_url String?
   role      Role     @default(customer)
   provider  String   @default("kantech.vercel.app")
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   Order Order[]
 }
@@ -47,10 +47,10 @@ model Vendor {
   password    String?
   name        String?
   description String?
-  rating      String?
+  rating      Decimal  @default(0)
   photo_url   String?
-  createdAt   DateTime @default(now()) @map(name: "created_at")
-  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   Menu  Menu[]
   Order Order[]
@@ -62,11 +62,11 @@ model Menu {
   vendor_id   String
   name        String?
   description String?
-  price       String?
-  rating      String?
+  price       Decimal?
+  rating      Decimal? @default(0)
   photo_url   String?
-  createdAt   DateTime @default(now()) @map(name: "created_at")
-  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   vendor Vendor  @relation(fields: [vendor_id], references: [id])
   Order  Order[]
@@ -80,10 +80,10 @@ model Order {
   menu_id     String
   note        String?
   status      Status
-  rating      String?
+  rating      Decimal? @default(0)
   review      String?
-  createdAt   DateTime @default(now()) @map(name: "created_at")
-  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   // Define foreign key relationships
   customer User   @relation(fields: [customer_id], references: [id])

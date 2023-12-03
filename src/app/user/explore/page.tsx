@@ -1,10 +1,28 @@
 "use client";
+import { useEffect, useState } from 'react'
 import Link from "next/link";
+
+import { Spinner } from "@material-tailwind/react";
 
 import AppBar from '@/components/menu/appbar'
 import VendorList from '@/components/cards/vendorlist'
 
 export default function Explore() {
+
+    const [vendorList, setVendorList] = useState([])
+
+    useEffect(() => {
+        fetchVendorList()
+    }, [])
+
+    const fetchVendorList = () => {
+        fetch("/api/user/explore")
+            .then(res => res.json())
+            .then(res => {
+                setVendorList(res)
+            })
+    }
+
     return (
         <>
             <div className="flex flex-col">
@@ -18,7 +36,26 @@ export default function Explore() {
                         </div>
                     </div>
                     <div className='flex flex-col justify-center mx-auto space-y-6 mb-20'>
-                        <Link href={"/user/vendor/" + "vendorid"}>
+                        {
+                            vendorList.length === 0 ?
+                                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                    <Spinner className="text-only-white h-10 w-10" />
+                                </div> :
+                                vendorList.map((vendor: any, index) => {
+                                    return (
+                                        <Link href={"/user/explore/vendor/" + vendor.id}>
+                                            <VendorList
+                                                key={index}
+                                                name={vendor.name}
+                                                description={vendor.description}
+                                                image={vendor.photo_url}
+                                                rating={vendor.rating}
+                                            />
+                                        </Link>
+                                    )
+                                })
+                        }
+                        {/* <Link href={"/user/vendor/" + "vendorid"}>
                             <VendorList
                                 name="Rumah Bu Jepe"
                                 description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque"
@@ -49,8 +86,8 @@ export default function Explore() {
                                 image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
                                 rating="4.7"
                             />
-                        </Link>
-                        
+                        </Link> */}
+
                     </div>
                 </div>
                 <AppBar activeButton="explore" />

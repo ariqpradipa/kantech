@@ -4,16 +4,19 @@ import React, { useState } from "react";
 import {
     Rating,
     Button,
+    Card,
+    CardHeader,
+    CardBody,
     Dialog,
     DialogHeader,
     DialogBody,
     DialogFooter,
-    Textarea
+    Textarea,
 } from "@material-tailwind/react";
 
 export default function History({ orderDate, menuName, vendorName, note, image, rating, review }: any) {
 
-    const [ratingValue, setRatingValue] = useState(rating === "" ? 0 : parseInt(rating, 10));
+    const [ratingValue, setRatingValue] = useState(rating === "" || rating === 0 || rating === null ? 0 : parseInt(rating, 10));
     const [reviewValue, setReviewValue] = useState(review)
     const [tempReviewValue, setTempReviewValue] = useState(review)
     const [openDialog, setOpenDialog] = useState(false);
@@ -45,9 +48,19 @@ export default function History({ orderDate, menuName, vendorName, note, image, 
 
     return (
         <>
-            <div className="flex">
-                <div className="flex-none w-28 lg:w-32 bg-cover bg-center text-center rounded-l-xl" style={{ backgroundImage: `url(${image})` }} />
-                <div className="flex flex-col w-full justify-between leading-normal bg-only-dark-gray px-4 py-3 rounded-r-xl">
+            <Card className="w-full max-w-full flex-row bg-only-dark-gray text-only-white">
+                <CardHeader
+                    shadow={false}
+                    floated={false}
+                    className="m-0 w-2/5 rounded-r-none"
+                >
+                    <img
+                        src={image}
+                        alt="card-image"
+                        className="h-full w-full object-cover"
+                    />
+                </CardHeader>
+                <CardBody className="w-3/5 p-3">
                     <div className="flex flex-col">
                         <p className="text-only-white text-xs">{formatOrderDate}</p>
                         <p className="text-only-white font-bold text-sm lg:text-lg">{menuName}</p>
@@ -83,7 +96,6 @@ export default function History({ orderDate, menuName, vendorName, note, image, 
                                                         labelProps={{
                                                             className: "before:content-none after:content-none",
                                                         }}
-
                                                     />
                                                 </div>
                                             </a>
@@ -93,8 +105,8 @@ export default function History({ orderDate, menuName, vendorName, note, image, 
                             }
                         </div>
                     </div>
-                </div>
-            </div >
+                </CardBody>
+            </Card>
 
             <Dialog
                 open={openDialog}

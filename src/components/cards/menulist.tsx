@@ -1,19 +1,17 @@
 import { useState } from "react";
 import {
     Dialog,
-    DialogHeader,
     DialogBody,
     DialogFooter,
     Card,
     CardHeader,
     CardBody,
-    Drawer,
     Button,
-    Typography,
-    IconButton,
 } from "@material-tailwind/react";
 
 export default function MenuList({ name, description, price, rating, image }: any) {
+
+    rating = rating === "" || rating === 0 || rating === null ? "-" : parseInt(rating, 10)
 
     const [openDialog, setOpenDialog] = useState(false);
 
@@ -33,11 +31,13 @@ export default function MenuList({ name, description, price, rating, image }: an
         setOpenDialog(!openDialog);
     };
 
+    console.log(name, description, price, rating, image)
+
     return (
         <>
             <a className="cursor-pointer" onClick={() => setOpenDialog(true)}>
                 <Card className="w-full max-w-full flex-row bg-only-dark-gray">
-                    <CardBody className="w-full max-w-full min-w-fit">
+                    <CardBody className="w-3/5">
                         <div className="w-full">
                             <p className="text-only-white font-bold text-sm lg:text-lg mb-2">{name}</p>
                             <p className="text-only-gray text-[10px] lg:text-xs pb-1">{description}</p>
@@ -53,7 +53,7 @@ export default function MenuList({ name, description, price, rating, image }: an
                     <CardHeader
                         shadow={false}
                         floated={false}
-                        className="m-0 w-2/6 shrink-0 rounded-l-none"
+                        className="m-0 w-2/5 rounded-l-none"
                     >
                         <img
                             src={image}
