@@ -28,23 +28,6 @@ export default function VendorUser({ params }: pageProps) {
 
         try {
 
-            // const vendor: any = prisma.vendor.findUnique({
-            //     select: {
-            //         name: true,
-            //         rating: true,
-            //     },
-            //     where: {
-            //         id: params.vendor_id
-            //     }
-            // })
-
-            // if (!vendor) {
-            //     alert("Vendor not found")
-            //     return
-            // }
-
-            // setVendorName(await vendor.name)
-            // setVendorRating(await vendor.rating)
 
             const menuResponse = await fetch("/api/user/explore/vendor", {
                 method: "POST",
@@ -58,14 +41,17 @@ export default function VendorUser({ params }: pageProps) {
 
             if (menuResponse.ok) {
 
-                setMenuList(await menuResponse.json())
+                const response_data = await menuResponse.json();
+                setVendorName(response_data[0].vendor.name)
+                setVendorRating(response_data[0].vendor.rating)
+                setMenuList(response_data)
 
             } else {
 
                 const data = await menuResponse.json();
                 alert(data.error || "Failed to login");
 
-            }            
+            }
 
         } catch (error) {
 
@@ -94,7 +80,7 @@ export default function VendorUser({ params }: pageProps) {
 
                         {
                             menuList.length === 0 ?
-                                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                <div className="fixed h-full w-full backdrop-blur-md inset-0 flex items-center justify-center">
                                     <Spinner className="text-only-white h-10 w-10" />
                                 </div> :
                                 menuList.map((menu: any, index) => {
@@ -106,14 +92,6 @@ export default function VendorUser({ params }: pageProps) {
                                     )
                                 })
                         }
-                        {/* <MenuList
-                            name="menuName"
-                            description="the food is so good"
-                            price="15000"
-                            rating="4.2"
-                            image="https://asset.kompas.com/crops/Kyp-MBp3Kf0PLGveth_zzhU2gfI=/0x0:1000x667/750x500/data/photo/2020/07/11/5f09e008e7fee.jpg"
-
-                        /> */}
                     </div>
                 </div>
                 <AppBar activeButton="explore" />

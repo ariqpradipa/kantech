@@ -4,7 +4,9 @@ import {
     CardBody
 } from "@material-tailwind/react"
 
-export default function VendorList({ name, description, image, rating }: any) {
+export default function VendorList({ props }: any) {
+
+    let { name, description, image, rating } = props
 
     rating === "" || rating === 0 || rating === null ? "-" : parseInt(rating, 10)
 

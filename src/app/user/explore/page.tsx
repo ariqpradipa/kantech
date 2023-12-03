@@ -46,10 +46,7 @@ export default function Explore() {
                                         <Link href={"/user/explore/vendor/" + vendor.id}>
                                             <VendorList
                                                 key={index}
-                                                name={vendor.name}
-                                                description={vendor.description}
-                                                image={vendor.photo_url}
-                                                rating={vendor.rating}
+                                                props={vendor}
                                             />
                                         </Link>
                                     )

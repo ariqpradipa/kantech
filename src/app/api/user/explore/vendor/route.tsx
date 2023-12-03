@@ -7,6 +7,9 @@ export async function POST(req: NextRequest) {
         const { vendor_id }: any = req.json();
 
         const menus: any = await prisma.menu.findMany({
+            where: {
+                vendor_id,
+            },
             select: {
                 id: true,
                 vendor_id: true,
@@ -15,10 +18,13 @@ export async function POST(req: NextRequest) {
                 price: true,
                 rating: true,
                 photo_url: true,
+                vendor: {
+                    select: {
+                        name: true,
+                        rating: true,
+                    }
+                }
             },
-            where: {
-                vendor_id,
-            }
         })
 
         return NextResponse.json(menus, { status: 200 });
