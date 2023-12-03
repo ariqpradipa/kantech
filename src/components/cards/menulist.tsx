@@ -8,8 +8,11 @@ import {
     CardBody,
     Button,
 } from "@material-tailwind/react";
+import jwt from "jsonwebtoken";
 
-export default function MenuList({ name, description, price, rating, image }: any) {
+export default function MenuList({ props }: any) {
+
+    let { id: menu_id, vendor_id, name, description, price, rating, photo_url: image } = props
 
     rating = rating === "" || rating === 0 || rating === null ? "-" : parseInt(rating, 10)
 
@@ -31,7 +34,37 @@ export default function MenuList({ name, description, price, rating, image }: an
         setOpenDialog(!openDialog);
     };
 
-    console.log(name, description, price, rating, image)
+    const handlePesan = async (value: any) => {
+
+        try {
+            const response = await fetch("/api/user/order/add", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    vendor_id,
+                    menu_id,
+                }),
+            })
+
+            if (response.ok) {
+
+                window.location.href = "/user/orders";
+
+            } else {
+
+                const data = await response.json();
+                alert(data.error || "Failed to make order");
+
+            }
+        } catch (error) {
+
+            console.error(error)
+
+        }
+    }
 
     return (
         <>
@@ -75,7 +108,7 @@ export default function MenuList({ name, description, price, rating, image }: an
                         <div className="pb-5">
                             <img
                                 className="w-full object-cover object-center rounded-xl"
-                                src="https://images.unsplash.com/photo-1682407186023-12c70a4a35e0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
+                                src={image}
                                 alt="nature image"
                             />
                         </div>
@@ -91,7 +124,7 @@ export default function MenuList({ name, description, price, rating, image }: an
                         <Button className="bg-transparent" onClick={() => setOpenDialog(false)} fullWidth>
                             <span className="text-only-white">batal</span>
                         </Button>
-                        <Button className="bg-only-purple" fullWidth>pesan</Button>
+                        <Button className="bg-only-purple" onClick={handlePesan} fullWidth>pesan</Button>
                     </div>
                 </DialogFooter>
             </Dialog>

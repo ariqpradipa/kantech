@@ -5,14 +5,18 @@ import Link from 'next/link';
 import {
     Input,
     Button,
+    Spinner,
     Typography,
 } from "@material-tailwind/react";
 
 
 export default function Login() {
 
+    const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleLogin = async (e: any) => {
         e.preventDefault(); // Prevent default form submission
@@ -22,7 +26,13 @@ export default function Login() {
             return;
         }
 
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email");
+            return;
+        }
+
         try {
+            setLoading(true);
             const response = await fetch("/api/user/auth/login", {
                 method: "POST",
                 headers: {
@@ -34,6 +44,7 @@ export default function Login() {
                 }),
             });
 
+            setLoading(false);
             if (response.ok) {
 
                 window.location.href = "/user/explore";
@@ -47,6 +58,7 @@ export default function Login() {
 
         } catch (error) {
 
+            setLoading(false);
             console.error(error);
 
         }
@@ -118,6 +130,16 @@ export default function Login() {
                 </div>
 
             </div>
+
+            {
+                loading ?
+                    <>
+                        <div className="fixed h-full w-full backdrop-blur-md inset-0 flex items-center justify-center">
+                            <Spinner className="text-only-white h-10 w-10" />
+                        </div>
+                    </> :
+                    <></>
+            }
         </>
     )
 }

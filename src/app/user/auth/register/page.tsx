@@ -5,25 +5,41 @@ import Link from 'next/link';
 import {
     Input,
     Button,
+    Spinner,
     Typography,
 } from "@material-tailwind/react";
 
 
 export default function Register() {
+
+    const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleCreateUser = async (e: any) => {
         e.preventDefault();
+
+        if (!email || !password || !confirmPassword) {
+            alert("Please fill in all fields");
+            return;
+        }
 
         if (password !== confirmPassword) {
             alert("Passwords do not match");
             return;
         }
 
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email");
+            return;
+        }
+
         try {
 
+            setLoading(true);
             const response = await fetch("/api/user/auth/register", {
                 method: "POST",
                 headers: {
@@ -34,7 +50,8 @@ export default function Register() {
                     password,
                 }),
             });
-            
+
+            setLoading(false);
             if (response.ok) {
 
                 window.location.href = "/user/auth/login";
@@ -47,6 +64,8 @@ export default function Register() {
             }
 
         } catch (error) {
+
+            setLoading(false);
             console.error("Error creating user:", error);
             alert("An unexpected error occurred");
         }
@@ -73,7 +92,7 @@ export default function Register() {
                                         </Typography>
                                         <Input
                                             crossOrigin
-                                            label="username"
+                                            label="email"
                                             className=" text-only-white !border-t-blue-gray-200 focus:!border-only-purple"
                                             labelProps={{
                                                 className: "hidden",
@@ -129,6 +148,16 @@ export default function Register() {
                     </div>
                 </div>
             </div>
+
+            {
+                loading ?
+                    <>
+                        <div className="fixed h-full w-full backdrop-blur-md inset-0 flex items-center justify-center">
+                            <Spinner className="text-only-white h-10 w-10" />
+                        </div>
+                    </> :
+                    <></>
+            }
         </>
     )
 }

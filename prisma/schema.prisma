@@ -79,14 +79,14 @@ model Order {
   vendor_id   String
   menu_id     String
   note        String?
-  status      Status
+  status      Status   @default(confirmation)
   rating      Decimal? @default(0)
   review      String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   // Define foreign key relationships
-  customer User   @relation(fields: [customer_id], references: [id])
-  vendor   Vendor @relation(fields: [vendor_id], references: [id])
-  menu     Menu   @relation(fields: [menu_id], references: [id])
+  user   User   @relation(fields: [customer_id], references: [id])
+  vendor Vendor @relation(fields: [vendor_id], references: [id])
+  menu   Menu   @relation(fields: [menu_id], references: [id])
 }

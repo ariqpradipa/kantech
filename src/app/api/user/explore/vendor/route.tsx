@@ -9,6 +9,7 @@ export async function POST(req: NextRequest) {
         const menus: any = await prisma.menu.findMany({
             select: {
                 id: true,
+                vendor_id: true,
                 name: true,
                 description: true,
                 price: true,

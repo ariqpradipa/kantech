@@ -65,13 +65,7 @@ export default function VendorUser({ params }: pageProps) {
                 const data = await menuResponse.json();
                 alert(data.error || "Failed to login");
 
-            }
-
-            // fetch("/api/user/explore/vendor")
-            //     .then(res => res.json())
-            //     .then(res => {
-
-            //     })
+            }            
 
         } catch (error) {
 
@@ -107,11 +101,7 @@ export default function VendorUser({ params }: pageProps) {
                                     return (
                                         <MenuList
                                             key={index}
-                                            name={menu.name}
-                                            description={menu.description}
-                                            image={menu.photo_url}
-                                            rating={menu.rating}
-                                            price={menu.price}
+                                            props={menu}
                                         />
                                     )
                                 })
