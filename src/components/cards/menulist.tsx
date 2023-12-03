@@ -7,6 +7,7 @@ import {
     CardHeader,
     CardBody,
     Button,
+    Spinner,
 } from "@material-tailwind/react";
 import jwt from "jsonwebtoken";
 
@@ -17,6 +18,7 @@ export default function MenuList({ props }: any) {
     rating = rating === "" || rating === 0 || rating === null ? "-" : parseInt(rating, 10)
 
     const [openDialog, setOpenDialog] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     function formatCurrency(value: string | number): string {
         const numberValue = typeof value === 'string' ? parseFloat(value) : value;
@@ -36,7 +38,11 @@ export default function MenuList({ props }: any) {
 
     const handlePesan = async (value: any) => {
 
+        setOpenDialog(false);
+
         try {
+
+            setLoading(true);
             const response = await fetch("/api/user/order/add", {
                 method: "POST",
                 credentials: "include",
@@ -49,6 +55,7 @@ export default function MenuList({ props }: any) {
                 }),
             })
 
+            setLoading(false);
             if (response.ok) {
 
                 window.location.href = "/user/orders";
@@ -61,6 +68,7 @@ export default function MenuList({ props }: any) {
             }
         } catch (error) {
 
+            setLoading(false);
             console.error(error)
 
         }
@@ -128,6 +136,16 @@ export default function MenuList({ props }: any) {
                     </div>
                 </DialogFooter>
             </Dialog>
+
+            {
+                loading ?
+                    <>
+                        <div className="fixed inset-0 w-full flex items-center justify-center">
+                            <Spinner className="text-only-white h-10 w-10" />
+                        </div>
+                    </> :
+                    <></>
+            }
         </>
     );
 }

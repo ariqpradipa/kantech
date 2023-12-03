@@ -4,7 +4,25 @@ import {
     CardBody
 } from "@material-tailwind/react"
 
-export default function OrderList({ menuName, vendorName, note, status, image }: any) {
+export default function OrderList({ props }: any) {
+
+    const { menu: { name: menuName, photo_url: image }, vendor: { name: vendorName }, note, status } = props
+
+    let statusNow;
+    if (status === "confirmation") {
+
+        statusNow = "Waiting Confirmation"
+
+    } else if (status === "process") {
+
+        statusNow = "On Process"
+
+    } else if (status === "pickup") {
+
+        statusNow = "Ready to Pickup"
+
+    }
+
     return (
         <>
             <Card className="w-full max-w-full flex-row bg-only-dark-gray text-only-white">
@@ -26,7 +44,7 @@ export default function OrderList({ menuName, vendorName, note, status, image }:
                         <p className="text-only-gray text-[10px] lg:text-xs">Note: {note}</p>
                         <div className="flex pt-2">
                             <div className="flex items-center justify-between bg-only-purple rounded">
-                                <p className="text-xs font-bold text-center p-1">{status}</p>
+                                <p className="text-xs font-bold text-center p-1">{statusNow}</p>
                             </div>
                         </div>
                     </div>

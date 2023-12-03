@@ -6,7 +6,7 @@ import {
 
 export default function VendorList({ props }: any) {
 
-    let { name, description, image, rating } = props
+    let { name, description, photo_url: image, rating } = props
 
     rating === "" || rating === 0 || rating === null ? "-" : parseInt(rating, 10)
 
