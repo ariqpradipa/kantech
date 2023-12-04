@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
     Rating,
@@ -15,12 +15,19 @@ import {
     Textarea,
 } from "@material-tailwind/react";
 
-export default function History({ orderDate, menuName, vendorName, note, image, rating, review }: any) {
+export default function History({ props }: any) {
+
+    const { id, createdAt: orderDate, menu: { name: menuName, photo_url: image }, vendor: { name: vendorName }, note, rating, review } = props
 
     const [ratingValue, setRatingValue] = useState(rating === "" || rating === 0 || rating === null ? 0 : parseInt(rating, 10));
-    const [reviewValue, setReviewValue] = useState(review)
-    const [tempReviewValue, setTempReviewValue] = useState(review)
+    const [reviewValue, setReviewValue] = useState(review === "" || review === null ? "" : review)
+    const [tempReviewValue, setTempReviewValue] = useState(reviewValue)
     const [openDialog, setOpenDialog] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        handleUpdate()
+    }, [ratingValue, reviewValue]);
 
     const options: any = {
         weekday: 'short',
@@ -32,7 +39,7 @@ export default function History({ orderDate, menuName, vendorName, note, image, 
         second: '2-digit',
     };
 
-    const formatOrderDate = (new Date(orderDate * 1000)).toLocaleDateString('en-ID', options)
+    const formatOrderDate = (new Date(orderDate)).toLocaleDateString('en-ID', options)
 
     const handleRating = (value: any) => {
         setRatingValue(value)
@@ -45,6 +52,39 @@ export default function History({ orderDate, menuName, vendorName, note, image, 
 
     const handleOpenDialog = (value: any) => {
         setOpenDialog(!openDialog)
+    }
+
+    const handleUpdate = async () => {
+        try {
+
+            setLoading(true);
+            const response = await fetch("/api/user/history/update", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id,
+                    rating: ratingValue,
+                    review: reviewValue,
+                }),
+            })
+
+            setLoading(false);
+            if (!response.ok) {
+
+                const data = await response.json();
+                alert(data.error || "Failed to update history");
+
+            }
+
+        } catch (error) {
+
+            setLoading(false);
+            console.error(error)
+
+        }
     }
 
     return (
