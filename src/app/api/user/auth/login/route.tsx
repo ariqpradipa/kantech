@@ -27,6 +27,12 @@ export async function POST(req: NextRequest) {
 
         }
 
+        if (user.provider !== 'kantech.vercel.app') {
+
+            return NextResponse.json({ error: 'Wrong login provider, try login wih SSO' }, { status: 401 });
+
+        }
+
         // Compare the provided password with the hashed password stored in the database
         const passwordMatch = await bcrypt.compare(password, user.password);
 

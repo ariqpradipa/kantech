@@ -28,15 +28,18 @@ enum Status {
 
 // Define User model
 model User {
-  id        String   @id @default(uuid()) @map("_id") // Assuming auto-generated IDs
-  email     String?  @unique
-  password  String?
-  name      String?
-  photo_url String?
-  role      Role     @default(customer)
-  provider  String   @default("kantech.vercel.app")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String   @id @default(uuid()) @map("_id") // Assuming auto-generated IDs
+  email         String   @unique
+  password      String?
+  name          String?
+  photo_url     String?
+  role          Role     @default(customer)
+  provider      String   @default("kantech.vercel.app")
+  npm           String?  @unique
+  faculty       String?
+  study_program String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   Order Order[]
 }
@@ -44,8 +47,8 @@ model User {
 // Define Vendor model
 model Vendor {
   id          String   @id @default(uuid()) @map("_id") // Assuming auto-generated IDs
-  email       String?  @unique
-  password    String?
+  email       String   @unique
+  password    String
   name        String?
   description String?
   rating      Decimal  @default(0)
