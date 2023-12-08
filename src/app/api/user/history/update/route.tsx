@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
     try {
 
         const { id, rating, review } = await req.json()
-        
+
         let token: any = cookies().get("jwt")
         token = token.value.replace(/^Bearer\s+/i, '')
         const jwt_payload: any = jwt.verify(token, process.env.JWT_SECRET)
