@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from 'next/link';
 import {
     Input,
@@ -17,6 +17,20 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+
+        if (typeof window === "undefined") {
+            return;
+        }
+
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.has("ticket")) {
+            AuthSso();
+        }
+
+    }, []);
 
     const handleLogin = async (e: any) => {
         e.preventDefault(); // Prevent default form submission
@@ -61,6 +75,49 @@ export default function Login() {
             setLoading(false);
             console.error(error);
 
+        }
+    };
+
+    const AuthSso = async () => {
+        setLoading(true);
+        if (typeof window === "undefined") {
+            return;
+        }
+
+        const url = new URL(window.location.href);
+        const params = url.searchParams;
+
+        if (!params.has("ticket")) {
+            const redirectUrl = `https://sso.ui.ac.id/cas2/login?service=${encodeURIComponent(
+                window.location.origin + window.location.pathname
+            )}`;
+            window.location.href = redirectUrl;
+        } else {
+            try {
+                const ticket = params.get("ticket") || "";
+                const service = window.location.origin + window.location.pathname;
+                const paramsUrl = new URLSearchParams({ ticket, service }).toString();
+
+                const response = await fetch(`/api/user/auth/login/sso?${paramsUrl}`, {
+                    method: "GET",
+                });
+
+                setLoading(false);
+
+                if (response.ok) {
+                    // Remove the ticket parameter from the URL
+                    params.delete("ticket");
+                    window.history.pushState({}, '', url.toString());
+                    window.location.href = "/user/explore";
+                } else {
+                    const data = await response.json();
+                    alert(data.error || "Failed to login");
+                }
+            } catch (error) {
+                setLoading(false);
+                console.error('Error during SSO authentication:', error);
+                alert('Error during SSO authentication');
+            }
         }
     };
 
@@ -114,7 +171,7 @@ export default function Login() {
                                 </Button>
                             </form>
 
-                            <Button className="mt-6 bg-only-purple" fullWidth>
+                            <Button className="mt-6 bg-only-purple" onClick={AuthSso} fullWidth>
                                 Login with sso
                             </Button>
                             <div className='flex justify-center mt-5'>
