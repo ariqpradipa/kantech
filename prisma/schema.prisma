@@ -64,9 +64,9 @@ model Vendor {
 model Menu {
   id          String   @id @default(uuid()) @map("_id") // Assuming auto-generated IDs
   vendor_id   String
-  name        String?
+  name        String
   description String?
-  price       Decimal?
+  price       Decimal
   rating      Decimal? @default(0)
   photo_url   String?
   createdAt   DateTime @default(now())
