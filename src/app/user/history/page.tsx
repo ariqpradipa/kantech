@@ -8,7 +8,7 @@ import HistoryList from '@/components/cards/historylist'
 
 export default function History() {
 
-    const [historyList, setHistoryList] = useState([])
+    const [historyList, setHistoryList] = useState([null])
 
     useEffect(() => {
         fetchHistory()
@@ -58,17 +58,23 @@ export default function History() {
                     </div>
                     <div className='flex flex-col justify-center mx-auto space-y-6 mb-20 w-full'>
                         {
-                            historyList.length === 0 ?
+                            historyList[0] === null ?
                                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                     <Spinner className="text-only-white h-10 w-10" />
-                                </div>
-                                :
-                                historyList.map((history: any) => (
-                                    <HistoryList
-                                        key={history.id}
-                                        props={history}
-                                    />
-                                ))
+                                </div> :
+                                historyList.length === 0 ?
+                                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                        <div className="flex flex-col justify-center items-center">
+                                            <text className="text-2xl font-bold mt-4 text-only-white">History Empty</text>
+                                            <text className="text-center text-only-white">Please make order first</text>
+                                        </div>
+                                    </div> :
+                                    historyList.map((history: any) => (
+                                        <HistoryList
+                                            key={history.id}
+                                            props={history}
+                                        />
+                                    ))
                         }
                         {/* <HistoryList
                             orderDate="1698937067"

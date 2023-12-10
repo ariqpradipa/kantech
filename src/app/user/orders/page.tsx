@@ -7,7 +7,7 @@ import OrderList from "@/components/cards/orderlist";
 
 export default function Orders() {
 
-    const [orderList, setOrderList] = useState([])
+    const [orderList, setOrderList] = useState([null])
 
     useEffect(() => {
         fetchOrderList()
@@ -56,18 +56,25 @@ export default function Orders() {
                     </div>
                     <div className='flex flex-col justify-center mx-auto space-y-6 mb-20'>
                         {
-                            orderList.length === 0 ?
+                            orderList[0] === null ?
                                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                     <Spinner className="text-only-white h-10 w-10" />
                                 </div> :
-                                orderList.map((order: any) => {
-                                    return (
-                                        <OrderList
-                                            key={order.id}
-                                            props={order}
-                                        />
-                                    )
-                                })
+                                orderList.length === 0 ?
+                                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                        <div className="flex flex-col justify-center items-center">
+                                            <text className="text-2xl font-bold mt-4 text-only-white">Order Empty</text>
+                                            <text className="text-center text-only-white">Please make order first</text>
+                                        </div>
+                                    </div> :
+                                    orderList.map((order: any) => {
+                                        return (
+                                            <OrderList
+                                                key={order.id}
+                                                props={order}
+                                            />
+                                        )
+                                    })
                         }
                     </div>
                 </div >

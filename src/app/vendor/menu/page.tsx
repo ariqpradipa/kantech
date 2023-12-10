@@ -28,6 +28,7 @@ export default function VendorMenu({ params }: pageProps) {
 
             const menuResponse = await fetch("/api/vendor/menu/get", {
                 method: "GET",
+
             });
 
             if (menuResponse.ok) {
@@ -87,9 +88,11 @@ export default function VendorMenu({ params }: pageProps) {
                                     <Spinner className="text-only-white h-10 w-10" />
                                 </div> :
                                 menuList.length === 0 ?
-                                    <div className="flex flex-col items-center justify-center">
-                                        <text className="text-2xl font-bold mt-4 text-only-white">Menu Kosong</text>
-                                        <text className="text-center text-only-white">Silahkan tambahkan menu terlebih dahulu</text>
+                                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                        <div className="flex flex-col justify-center items-center">
+                                            <text className="text-2xl font-bold mt-4 text-only-white">Menu Kosong</text>
+                                            <text className="text-center text-only-white">Silahkan tambahkan menu terlebih dahulu</text>
+                                        </div>
                                     </div> :
                                     menuList.map((menu: any, index) => {
                                         return (
