@@ -17,6 +17,7 @@ datasource db {
 enum Role {
   customer
   admin
+  vendor
 }
 
 enum Status {
@@ -53,6 +54,7 @@ model Vendor {
   description String?
   rating      Decimal  @default(0)
   photo_url   String?
+  role        Role     @default(vendor)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

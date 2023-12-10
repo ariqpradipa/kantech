@@ -174,11 +174,17 @@ export default function Login() {
                             <Button className="mt-6 bg-only-purple" onClick={AuthSso} fullWidth>
                                 Login with sso
                             </Button>
-                            <div className='flex justify-center mt-5'>
-                                <Typography className="mt-4 text-center font-normal text-only-white">
+                            <div className='flex justify-between mt-5'>
+                                <Typography className="mt-4 text-left font-normal text-only-white flex flex-col">
                                     Don’t have account?{" "}
                                     <Link href="/user/auth/register" className="font-medium text-only-purple">
                                         Create Account
+                                    </Link>
+                                </Typography>
+                                <Typography className="mt-4 text-left font-normal text-only-white flex flex-col">
+                                    Vendor?{" "}
+                                    <Link href="/vendor/auth/login" className="font-medium text-only-purple">
+                                        Login Here
                                     </Link>
                                 </Typography>
                             </div>
