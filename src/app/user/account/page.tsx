@@ -4,6 +4,36 @@ import { Avatar } from "@material-tailwind/react";
 import AppBar from '@/components/menu/appbar'
 
 export default function Account() {
+
+    const handleLogout = async () => {
+
+        console.log("Logging out...")
+
+        try {
+
+            const response = await fetch('/api/auth/logout', {
+                method: 'GET',
+            });
+
+            if (response.status === 200) {
+
+                console.log("Logout successful")
+                window.location.href = "/";
+
+            } else {
+
+                const data = await response.json();
+                throw new Error(data.error);
+
+            }
+
+        } catch (error: any) {
+
+            console.error("An unexpected error occurred:", error);
+            alert(error.message);
+
+        }
+    }
     return (
         <>
             <div className="flex flex-col h-full  max-h-screen">
@@ -22,31 +52,31 @@ export default function Account() {
                             size="xl"
                         />
                         <div className="flex flex-col ml-2 justify-center">
-                            <text className="text-3xl font-bold text-only-white">Username</text>
-                            <text className="text-base text-only-white">username@email.com</text>
+                            <p className="text-3xl font-bold text-only-white">Username</p>
+                            <p className="text-base text-only-white">username@email.com</p>
                         </div>
                     </div>
 
                     <div className="flex flex-col h-screen justify-between">
                         <div className="flex flex-col mt-10 gap-3">
                             <Link href="#">
-                                <text className="text-only-white text-xl font-bold">Update Profile</text>
+                                <p className="text-only-white text-xl font-bold">Update Profile</p>
                             </Link>
                             <Link href="#">
-                                <text className="text-only-white text-xl font-bold">Change Password</text>
+                                <p className="text-only-white text-xl font-bold">Change Password</p>
                             </Link>
                             <Link href="#">
-                                <text className="text-only-white text-xl font-bold">Favorites</text>
+                                <p className="text-only-white text-xl font-bold">Favorites</p>
                             </Link>
                         </div>
 
                         <div className="flex flex-col mb-24 gap-3">
                             <Link href="#">
-                                <text className="text-only-white text-xl font-bold">Terms & Privacy</text>
+                                <p className="text-only-white text-xl font-bold">Terms & Privacy</p>
                             </Link>
-                            <Link href="#">
-                                <text className="text-only-white text-xl font-bold">Logout</text>
-                            </Link>
+                            <a onClick={handleLogout} className="cursor-pointer">
+                                <p className="text-only-white text-xl font-bold">Logout</p>
+                            </a>
                         </div>
                     </div>
                 </div>

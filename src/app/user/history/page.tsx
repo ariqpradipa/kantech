@@ -76,36 +76,6 @@ export default function History() {
                                         />
                                     ))
                         }
-                        {/* <HistoryList
-                            orderDate="1698937067"
-                            menuName="Bubur Ayam"
-                            vendorName="Rumah Bu Jepe"
-                            image="https://asset.kompas.com/crops/Kyp-MBp3Kf0PLGveth_zzhU2gfI=/0x0:1000x667/750x500/data/photo/2020/07/11/5f09e008e7fee.jpg"
-                            note="tidak pakai sambel sama sekali"
-                            status="Process"
-                            rating=""
-                            review=""
-                        />
-                        <HistoryList
-                            orderDate="1698937067"
-                            menuName="Bubur Ayam madura"
-                            vendorName="Rumah Bu Jepe 2"
-                            image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                            note="tidak pakai sambel sama sekali"
-                            status="Process"
-                            rating="2"
-                            review=""
-                        />
-                        <HistoryList
-                            orderDate="1698937067"
-                            menuName="Bubur Ayam pedas"
-                            vendorName="Rumah Bu Jepe 3"
-                            image="https://awsimages.detik.net.id/community/media/visual/2023/02/16/resep-bubur-ayam-cincang-dan-sayuran_43.jpeg"
-                            note="tidak pakai sambel sama sekali"
-                            status="Process"
-                            rating="3"
-                            review="Makanannya kaya sampah, lain kali di kasih sampah beneran aja"
-                        /> */}
                     </div>
                 </div>
                 <AppBar activeButton="history" />
