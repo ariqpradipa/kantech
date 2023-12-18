@@ -12,6 +12,7 @@ import {
     DialogHeader,
     DialogBody,
     DialogFooter,
+    Input,
     Textarea,
 } from "@material-tailwind/react";
 
@@ -42,17 +43,20 @@ export default function AddMenu({ props }: any) {
                 handler={handleOpenDialog}
                 className="bg-only-dark-gray"
             >
-                <DialogHeader className="text-only-white">Review</DialogHeader>
+                <DialogHeader className="text-only-white">Add Menu</DialogHeader>
                 <DialogBody>
-                    <div >
-                        <Textarea
-                            resize={true}
-                            className="text-only-white !border-t-blue-gray-200 focus:!border-only-purple"
-                            labelProps={{
-                                className: "hidden",
-                            }}
-                            value="semua lo ga beber"
-                        />
+                    <div className="flex justify-center items-center">
+                        <div className="flex flex-col w-2/3 gap-5">
+                            <Input crossOrigin label="Nama Menu" color="white" />
+                            <Textarea
+                                label="Deskripsi"
+                                color="cyan"
+                                className="text-only-white"
+                            />
+                            <Input crossOrigin label="Harga" type="number" color="white" />
+
+                        </div>
+
                     </div>
                 </DialogBody>
                 <DialogFooter>
@@ -67,7 +71,7 @@ export default function AddMenu({ props }: any) {
                         variant="gradient"
                         color="green"
                     >
-                        <span>Confirm</span>
+                        <span>Tambah</span>
                     </Button>
                 </DialogFooter>
             </Dialog>
