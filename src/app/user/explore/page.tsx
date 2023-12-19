@@ -41,7 +41,7 @@ export default function Explore() {
                                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                                     <Spinner className="text-only-white h-10 w-10" />
                                 </div> :
-                                vendorList.map((vendor: any) => {
+                                vendorList?.map((vendor: any) => {
                                     return (
                                         <Link href={"/user/explore/vendor/" + vendor.id} key={vendor.id}>
                                             <VendorList
