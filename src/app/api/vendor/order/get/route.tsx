@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
                 vendor_id,
                 status: {
                     not: {
-                        in: ["pickup", "complete"]
+                        in: ["complete"]
                     }
                 },
             },
