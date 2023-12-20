@@ -9,20 +9,20 @@ import prisma from "@/lib/prisma";
 export async function POST(req: NextRequest) {
     try {
 
-        const { email, password }: any = await req.json();
+        const { email, password, name, description }: any = await req.json();
 
         if (!email || !password) {
             return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
         }
 
-        let token: any = cookies().get("jwt")
-        token = token.value.replace(/^Bearer\s+/i, '')
-        const jwt_payload: any = jwt.verify(token, process.env.JWT_SECRET)
-        const role = jwt_payload.role
+        // let token: any = cookies().get("jwt")
+        // token = token.value.replace(/^Bearer\s+/i, '')
+        // const jwt_payload: any = jwt.verify(token, process.env.JWT_SECRET)
+        // const role = jwt_payload.role
 
-        if (role !== "admin") {
-            return NextResponse.json({ error: 'You are not authorized to create a vendor' }, { status: 401 });
-        }
+        // if (role !== "admin") {
+        //     return NextResponse.json({ error: 'You are not authorized to create a vendor' }, { status: 401 });
+        // }
 
         // convert password to hash
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -31,6 +31,8 @@ export async function POST(req: NextRequest) {
             data: {
                 email,
                 password: hashedPassword,
+                name,
+                description
             }
         });
 

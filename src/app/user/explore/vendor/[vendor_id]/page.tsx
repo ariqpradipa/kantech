@@ -14,17 +14,15 @@ interface pageProps {
 export default function VendorUser({ params }: pageProps) {
     const [vendorName, setVendorName] = useState("")
     const [vendorRating, setVendorRating] = useState("")
-    const [totalOrders, setTotalOrders] = useState(0)
-    const [menuList, setMenuList] = useState([])
+    const [menuList, setMenuList] = useState([null])
 
     useEffect(() => {
         fetchMenuList()
-    }, [])
+    })
 
     const fetchMenuList = async () => {
 
         try {
-
 
             const menuResponse = await fetch("/api/user/explore/vendor", {
                 method: "POST",
@@ -39,8 +37,8 @@ export default function VendorUser({ params }: pageProps) {
             if (menuResponse.ok) {
 
                 const response_data = await menuResponse.json();
-                setVendorName(response_data[0].vendor.name)
-                setVendorRating(response_data[0].vendor.rating)
+                setVendorName(response_data[0]?.vendor?.name)
+                setVendorRating(response_data[0]?.vendor?.rating)
                 setMenuList(response_data)
 
             } else {
@@ -76,18 +74,25 @@ export default function VendorUser({ params }: pageProps) {
                     <div className='flex flex-col justify-center mx-auto space-y-6 mb-20'>
 
                         {
-                            menuList.length === 0 ?
+                            menuList[0] === null ?
                                 <div className="fixed h-full w-full backdrop-blur-md inset-0 flex items-center justify-center">
                                     <Spinner className="text-only-white h-10 w-10" />
                                 </div> :
-                                menuList.map((menu: any, index) => {
-                                    return (
-                                        <MenuList
-                                            key={menu.id}
-                                            props={menu}
-                                        />
-                                    )
-                                })
+                                menuList.length === 0 ?
+                                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                        <div className="flex flex-col justify-center items-center">
+                                            <p className="text-2xl font-bold mt-4 text-only-white">Menu Empty</p>
+                                            <p className="text-center text-only-white">{"Vendor does'nt have menu yet"}</p>
+                                        </div>
+                                    </div> :
+                                    menuList.map((menu: any, index) => {
+                                        return (
+                                            <MenuList
+                                                key={menu.id}
+                                                props={menu}
+                                            />
+                                        )
+                                    })
                         }
                     </div>
                 </div>

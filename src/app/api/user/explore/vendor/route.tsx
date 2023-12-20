@@ -4,7 +4,11 @@ import prisma from '@/lib/prisma';
 export async function POST(req: NextRequest) {
     try {
 
-        const { vendor_id }: any = req.json();
+        const { vendor_id }: any = await req.json();
+
+        if (vendor_id === undefined || vendor_id === null || vendor_id === "") {
+            return NextResponse.json({ error: 'Vendor ID is required' }, { status: 400 });
+        }
 
         const menus: any = await prisma.menu.findMany({
             where: {
