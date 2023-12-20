@@ -107,7 +107,9 @@ export default function VendorMenu({ params }: pageProps) {
                 </div>
             </div>
 
-            {openAddMenu && <AddMenu />}
+            {openAddMenu ? <AddMenu callback={() => {
+                setOpenAddMenu(false)
+            }} /> : null}
         </>
     )
 }

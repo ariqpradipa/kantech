@@ -26,7 +26,6 @@ export async function POST(req: NextRequest) {
                 name,
                 description,
                 price,
-                photo_url,
                 vendor_id
             }
         })

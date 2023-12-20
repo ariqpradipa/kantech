@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { cookies } from "next/headers";
+
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import prisma from '@/lib/prisma';
@@ -6,20 +8,27 @@ import prisma from '@/lib/prisma';
 export async function POST(req: NextRequest) {
     try {
 
-        const { email, password }: any = await req.json();
+        const { oldPassword, newPassword }: any = await req.json();
 
-        if (!email || !password) {
+        if (!oldPassword || !newPassword) {
 
-            return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
+            return NextResponse.json({ error: 'oldPassword and newPassword required' }, { status: 400 });
 
         }
+
+        let token: any = cookies().get("jwt")
+        token = token.value.replace(/^Bearer\s+/i, '')
+        const jwt_payload: any = jwt.verify(token, process.env.JWT_SECRET)
+        const customer_id = jwt_payload.id
 
         // Check if the user with the provided email exists
         const user: any = await prisma.user.findUnique({
 
-            where: { email },
+            where: { id: customer_id },
 
         });
+
+        console.log(user)
 
         if (!user) {
 
@@ -29,47 +38,37 @@ export async function POST(req: NextRequest) {
 
         if (user.provider !== 'kantech.vercel.app') {
 
-            return NextResponse.json({ error: 'Wrong login provider, try login wih SSO' }, { status: 401 });
+            return NextResponse.json({ error: 'You are logged in using SSO, change password on the provider page' }, { status: 401 });
 
         }
 
         // Compare the provided password with the hashed password stored in the database
-        const passwordMatch = await bcrypt.compare(password, user.password);
+        const passwordMatch = await bcrypt.compare(oldPassword, user.password);
 
         if (!passwordMatch) {
 
-            return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
+            return NextResponse.json({ error: 'Invalid password' }, { status: 401 });
 
         }
 
-        // Generate a JWT token
-        const token = jwt.sign({
-            id: user.id,
-            email: user.email,
-            role: user.role,
-            provider: user.provider,
-            name: user?.name,
-            photo_url: user?.photo_url
-        }, process.env.JWT_SECRET, {
+        // Hash the new password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-            expiresIn: '30d', // Token expiration time
+        console.log(hashedPassword)
+
+        // Update the user with the new hashed password
+        const updatedPassword = await prisma.user.update({
+
+            where: { id: customer_id },
+            data: { password: hashedPassword },
 
         });
 
-        // Return the token in the response
-        // return NextResponse.json({ token }, { status: 200 });
-
-        // Set the token as a cookie
-        const cookieOptions: any = [
-            `jwt=Bearer ${token}; Path=/; HttpOnly; Max-Age=${30 * 24 * 60 * 60}; SameSite=Strict`,
-            process.env.NODE_ENV === 'production' ? 'Secure' : '', // Set to 'Secure' in production for HTTPS
-        ];
-
-        return NextResponse.json({ token }, { headers: { 'Set-Cookie': cookieOptions } });
+        return NextResponse.json(updatedPassword, { status: 200 });
 
     } catch (error) {
 
-        console.error('Error handling login:', error);
+        console.error('Error handling change password:', error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
 
     } finally {

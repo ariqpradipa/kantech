@@ -33,7 +33,7 @@ model User {
   email         String   @unique
   password      String?
   name          String?
-  photo_url     String?
+  photo_url     String?  @default("https://www.sasa.co.id/medias/page_medias/nasi_ayam_bakar.jpg")
   role          Role     @default(customer)
   provider      String   @default("kantech.vercel.app")
   npm           String?  @unique
@@ -53,7 +53,7 @@ model Vendor {
   name        String?
   description String?
   rating      Decimal  @default(0)
-  photo_url   String?
+  photo_url   String?  @default("https://www.sasa.co.id/medias/page_medias/nasi_ayam_bakar.jpg")
   role        Role     @default(vendor)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -70,7 +70,7 @@ model Menu {
   description String?
   price       Decimal
   rating      Decimal? @default(0)
-  photo_url   String?
+  photo_url   String?  @default("https://www.sasa.co.id/medias/page_medias/nasi_ayam_bakar.jpg")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

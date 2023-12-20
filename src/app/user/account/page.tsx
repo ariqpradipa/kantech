@@ -1,9 +1,48 @@
 "use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Avatar } from "@material-tailwind/react";
 import AppBar from '@/components/menu/appbar'
 
 export default function Account() {
+
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+
+    useEffect(() => {
+
+        const getUser = async () => {
+
+            try {
+
+                const response = await fetch('/api/auth/me', {
+                    method: 'GET',
+                });
+
+                if (response.status === 200) {
+
+                    const data = await response.json();
+                    setUsername(data.username)
+                    setEmail(data.email)
+
+                } else {
+
+                    const data = await response.json();
+                    throw new Error(data.error);
+
+                }
+
+            } catch (error: any) {
+
+                console.error("An unexpected error occurred:", error);
+                alert(error.message);
+
+            }
+        }
+
+        getUser()
+
+    }, [])
 
     const handleLogout = async () => {
 
@@ -52,8 +91,8 @@ export default function Account() {
                             size="xl"
                         />
                         <div className="flex flex-col ml-2 justify-center">
-                            <p className="text-3xl font-bold text-only-white">Username</p>
-                            <p className="text-base text-only-white">username@email.com</p>
+                            <p className="text-3xl font-bold text-only-white">{username}</p>
+                            <p className="text-base text-only-white">{email}</p>
                         </div>
                     </div>
 
@@ -62,7 +101,7 @@ export default function Account() {
                             <Link href="#">
                                 <p className="text-only-white text-xl font-bold">Update Profile</p>
                             </Link>
-                            <Link href="#">
+                            <Link href="/user/account/passwordchange">
                                 <p className="text-only-white text-xl font-bold">Change Password</p>
                             </Link>
                             <Link href="#">
